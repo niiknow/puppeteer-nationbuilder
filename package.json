@@ -16,7 +16,7 @@
     "type": "git"
   },
   "scripts": {
-    "test": "jest --runInBand",
+    "test": "DEBUG=puppeteer-nationbuilder jest --runInBand",
     "lint": "eslint --ext .js,.vue src/",
     "lint-fix": "eslint --fix --ext .js src/"
   },

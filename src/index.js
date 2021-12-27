@@ -87,7 +87,7 @@ class PuppeteerNationBuilder {
       page.click('[name="commit"]')
     ]);
 
-    return this;
+    return page;
   }
 
   async cleanSnapshot(name='Daily snapshot', keep=7) {
@@ -100,28 +100,36 @@ class PuppeteerNationBuilder {
     ]);
 
 /*eslint-disable */
-    await page.evaluate((name, keep) => {
-      // hijack confirm
-      window.confirm = function(msg) { return true; }
-      const snapshots = [...document.querySelectorAll('td')]
-        .filter(txt => txt.textContent.includes(name))
+    let remain = keep + 1;
+    while (remain > keep) {
+      remain = await page.evaluate(async (name, keep) => {
+        return await new Promise(resolve => {
+          // hijack confirm
+          window.confirm = function(msg) { return true; }
+          const snapshots = [...document.querySelectorAll('td')]
+            .filter(txt => txt.textContent.includes(name));
 
-      if (keep <= 1) {
-        keep = 1
-      }
+          let remain = snapshots.length;
+          if (keep <= 1) {
+            keep = 1
+          }
 
-      for(var i = snapshots.length; i > keep; i--) {
-        const delLink = snapshots[i-1].parentNode.querySelector('a[data-method="delete"')
+          if (snapshots.length > keep) {
+            const delLink = snapshots[snapshots.length - 1].parentNode.querySelector('a[data-method="delete"');
+            if (delLink) {
+              delLink.click();
+              remain--;
+            }
+          }
 
-        if (delLink) {
-          delLink.click()
-        }
-      }
-
-    }, name, keep)
+          resolve(remain);
+        });
+      }, name, keep);
+      debug('backup remain', remain)
+    }
 /*eslint-enable */
 
-    return this;
+    return remain;
   }
 
   async fetchFirstSnapshot(name='Daily snapshot', downloadPath='/tmp/puppeteerdl') {
@@ -165,10 +173,6 @@ class PuppeteerNationBuilder {
       }
     }, name)
 /*eslint-enable */
-
-    debug('Waiting for download to finish...');
-
-    // TODO: delete file
   }
 }
 
