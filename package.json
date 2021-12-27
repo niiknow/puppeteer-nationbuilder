@@ -1,0 +1,32 @@
+{
+  "name": "puppeteer-nationbuilder",
+  "version": "0.1.0",
+  "description": "Puppeteer NationBuilder automation",
+  "author": "Tom Noogen",
+  "main": "src/index.js",
+  "license": "MIT",
+  "keywords": [
+    "javascript",
+    "puppeteer",
+    "nationbuilder"
+  ],
+  "homepage": "https://github.com/niiknow/puppeteer-nationbuilder",
+  "repository": {
+    "url": "https://github.com/niiknow/puppeteer-nationbuilder.git",
+    "type": "git"
+  },
+  "scripts": {
+    "test": "jest --runInBand",
+    "lint": "eslint --ext .js,.vue src/",
+    "lint-fix": "eslint --fix --ext .js src/"
+  },
+  "devDependencies": {
+    "chrome-aws-lambda": "^10.1.0",
+    "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.3.0",
+    "jest": "^27.4.5",
+    "jest-puppeteer": "^6.0.3",
+    "js-yaml": "^4.1.0",
+    "puppeteer-core": "^10.4.0"
+  }
+}
