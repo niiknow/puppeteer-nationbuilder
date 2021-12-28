@@ -90,7 +90,7 @@ class PuppeteerNationBuilder {
     return page;
   }
 
-  async cleanSnapshot(name='Daily snapshot', keep=7) {
+  async cleanSnapshot(keep=7, name='Daily snapshot') {
     await this.init();
     let page = await this.opts.browser.newPage();
 
@@ -132,7 +132,7 @@ class PuppeteerNationBuilder {
     return remain;
   }
 
-  async fetchFirstSnapshot(name='Daily snapshot', downloadPath='/tmp/puppeteerdl') {
+  async fetchFirstSnapshot(downloadPath='/tmp/puppeteerdl', name='Daily snapshot') {
     await this.init();
     fs.existsSync(downloadPath) || fs.mkdirSync(downloadPath, { recursive: true });
 

@@ -8,8 +8,8 @@ describe('Nation Builder', () => {
     const nb = new PuppeteerNationBuilder(process.env.SITENAME)
     const page = await nb.logIn(process.env.USERNAME, process.env.USERPASS)
     const expected = 7
-    const remain = await nb.cleanSnapshot('Daily snapshot', expected)
-    await expect(page.title()).resolves.toBe('rightnowmn snapshots')
+    const remain = await nb.cleanSnapshot(expected)
+    await expect(page.title()).resolves.toBe(process.env.SITENAME + ' snapshots')
     nb.opts.browser.close()
     expect(remain <= expected).toBe(true)
   })
