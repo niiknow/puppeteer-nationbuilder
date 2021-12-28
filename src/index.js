@@ -150,29 +150,34 @@ class PuppeteerNationBuilder {
 
     debug('Starting download...');
 
-    // handle waiting for download to complete
-    page.on('response', async response => {
-        const contentType = response.headers()['content-type'];
+    return await new Promise(async resolve => {
+      // handle waiting for download to complete
+      page.on('response', async response => {
+        const url = response.request().url().split('?')[0];
 
-        if (contentType === 'application/octet-stream') {
-          const fileName = path.basename(response.request().url());
-          await waitForDownloadToComplete(`${downloadPath}/${fileName}`);
+        if (url.indexOf('.s3.amazonaws.com/') > 0) {
+          const fileName = path.basename(url);
+          const fullPath = `${downloadPath}/${fileName}`.replace(/\.+$/, '');
+          debug('full path', fullPath);
+          await waitForDownloadToComplete(fullPath);
+          return resolve(fullPath)
         }
-    });
+      });
 
-/*eslint-disable */
-    await page.evaluate((name) => {
-      // hijack confirm
-      window.confirm = function(msg) { return true; }
+  /*eslint-disable */
+      await page.evaluate((name) => {
+        // hijack confirm
+        window.confirm = function(msg) { return true; }
 
-      const snapshots = [...document.querySelectorAll('td')]
-        .filter(txt => txt.textContent.includes(name))
+        const snapshots = [...document.querySelectorAll('td')]
+          .filter(txt => txt.textContent.includes(name))
 
-      if (snapshots && snapshots.length > 0) {
-        snapshots[0].parentNode.querySelector('a[href$="/download"').click()
-      }
-    }, name)
-/*eslint-enable */
+        if (snapshots && snapshots.length > 0) {
+          snapshots[0].parentNode.querySelector('a[href$="/download"').click()
+        }
+      }, name)
+  /*eslint-enable */
+    })
   }
 }
 
