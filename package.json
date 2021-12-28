@@ -1,9 +1,10 @@
 {
   "name": "puppeteer-nationbuilder",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Puppeteer NationBuilder automation",
   "author": "Tom Noogen",
   "main": "src/index.js",
+  "type": "module",
   "license": "MIT",
   "keywords": [
     "javascript",

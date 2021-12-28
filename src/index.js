@@ -150,7 +150,7 @@ class PuppeteerNationBuilder {
 
     debug('Starting download...');
 
-    return await new Promise(async resolve => {
+    return await new Promise(resolve => {
       // handle waiting for download to complete
       page.on('response', async response => {
         const url = response.request().url().split('?')[0];
@@ -160,12 +160,12 @@ class PuppeteerNationBuilder {
           const fullPath = `${downloadPath}/${fileName}`.replace(/\.+$/, '');
           debug('full path', fullPath);
           await waitForDownloadToComplete(fullPath);
-          return resolve(fullPath)
+          return resolve(fullPath);
         }
       });
 
   /*eslint-disable */
-      await page.evaluate((name) => {
+      page.evaluate((name) => {
         // hijack confirm
         window.confirm = function(msg) { return true; }
 
@@ -177,7 +177,7 @@ class PuppeteerNationBuilder {
         }
       }, name)
   /*eslint-enable */
-    })
+    });
   }
 }
 
