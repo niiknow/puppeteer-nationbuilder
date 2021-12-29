@@ -1,6 +1,6 @@
 const fs       = require('fs');
 const path     = require('path');
-const chromium = require('chromium');
+const chromium = require('chrome-aws-lambda');
 const debug    = require('debug')('puppeteer-nationbuilder');
 
 async function waitForDownloadToComplete(fileName) {
