@@ -6,3 +6,6 @@ tests/
 .eslintrc.js
 index.html
 webpack.mix.js
+env.yml
+babel.config.js
+jest.config.js
