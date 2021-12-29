@@ -1,8 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import chromium from 'chrome-aws-lambda';
-
-const debug = require('debug')('puppeteer-nationbuilder');
+const fs       = require('fs');
+const path     = require('path');
+const chromium = require('chromium');
+const debug    = require('debug')('puppeteer-nationbuilder');
 
 async function waitForDownloadToComplete(fileName) {
   return new Promise((resolve) => {

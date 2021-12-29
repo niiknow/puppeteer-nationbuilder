@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-nationbuilder",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Puppeteer NationBuilder automation",
   "author": "Tom Noogen",
   "main": "src/index.js",
