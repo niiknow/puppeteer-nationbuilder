@@ -1,10 +1,9 @@
 {
   "name": "puppeteer-nationbuilder",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Puppeteer NationBuilder automation",
   "author": "Tom Noogen",
   "main": "src/index.js",
-  "type": "module",
   "license": "MIT",
   "keywords": [
     "javascript",
@@ -27,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.5",
+    "babel-jest": "^27.4.5",
     "eslint": "^8.5.0",
     "jest": "^27.4.5",
     "js-yaml": "^4.1.0",

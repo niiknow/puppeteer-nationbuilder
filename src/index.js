@@ -181,4 +181,4 @@ class PuppeteerNationBuilder {
   }
 }
 
-export default PuppeteerNationBuilder;
+module.exports = PuppeteerNationBuilder;

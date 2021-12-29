@@ -1,10 +1,10 @@
 require('./_loadConfig')
-import PuppeteerNationBuilder from '../src/index'
+import PuppeteerNationBuilder from '../src/index.js'
 
 jest.setTimeout(60000)
 
 describe('Nation Builder', () => {
-  test('download first snapshot', async () => {
+  /*test('download first snapshot', async () => {
     const nb = new PuppeteerNationBuilder(process.env.SITENAME)
     const page = await nb.logIn(process.env.USERNAME, process.env.USERPASS)
     const expected = '/tmp/puppeteerdl'
@@ -20,7 +20,7 @@ describe('Nation Builder', () => {
     await nb.createSnapshot()
     await expect(page.title()).resolves.toBe(process.env.SITENAME + ' snapshots')
     nb.opts.browser.close()
-  })
+  })*/
 
   test('clean snapshot', async () => {
     const nb = new PuppeteerNationBuilder(process.env.SITENAME)
